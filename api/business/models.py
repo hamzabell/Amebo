@@ -14,8 +14,11 @@ class Business(models.Model):
     business_category = models.CharField(max_length=4, choices=Category.choices, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     address = models.TextField()
-    name = models.CharField(max_length=255)
+    business_name = models.CharField(max_length=255)
     pictures = models.CharField(max_length=255)
+
+    def __str__(self) -> str:
+        return self.business_name
 
 class Product(models.Model):
     business = models.ForeignKey(Business, on_delete=models.CASCADE)
@@ -24,9 +27,17 @@ class Product(models.Model):
     image = models.CharField(max_length=255)
     description = models.TextField()
 
+    def __str__(self) -> str:
+        return self.product_name
+
 class Rating(models.Model):
-    business = models.ForeignKey(Business, on_delete=models.CASCADE)
+    business = models.ForeignKey(Business, on_delete=models.CASCADE, default=None, null=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, default=None, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     numberOfStars = models.IntegerField()
-    comments = models.TextField()
+    comment = models.TextField()
     images = models.CharField(max_length=255)
     dateCreated = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return str(self.numberOfStars)

@@ -37,10 +37,22 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'drf_yasg',
     'rest_framework',
     'core',
     'business'
 ]
+
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'AUTH Token eg BEARER JWT': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -80,8 +92,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'amebo',
-        'USER': 'test',
-        'PASSWORD': '123456',
+        'USER': 'postgres',
+        'PASSWORD': 'Kingsteph1',
         'HOST': 'localhost'
     }
 }
